@@ -128,6 +128,7 @@ module.exports = {
                     },
                 ],
                 include: paths.appSrc,
+
             },
             // ** ADDING/UPDATING LOADERS **
             // The "file" loader handles all assets unless explicitly excluded.
@@ -175,12 +176,19 @@ module.exports = {
                 options: {
                     plugins: [
                         ['import', {libraryName: 'antd-mobile', style: true}],
+                        "transform-async-to-generator",
+                        "transform-decorators-legacy"
                     ],
                     // This is a feature of `babel-loader` for webpack (not Babel itself).
                     // It enables caching results in ./node_modules/.cache/babel-loader/
                     // directory for faster rebuilds.
                     cacheDirectory: true,
-                },
+                    presets: [
+                        ["es2015", {modules: false}],
+                        "stage-0",
+                        "react"
+                    ],
+                }
             },
             // "postcss" loader applies autoprefixer to our CSS.
             // "css" loader resolves paths in CSS and adds assets as dependencies.
